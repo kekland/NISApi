@@ -140,7 +140,10 @@ Used to check credentials of user - it is faster than logging in, but it does no
 Used primarily to register - first, it tries to log in with given password, 
 if it fails, it tries to log in with default password ("Qqwerty1!"), and if it also fails,
 fires onFailure();
-If everything succeeds, it will save data into NISData class.
+
+If logging in with default password succeeds, it changes password to password that was given.
+
+It will also save data to NISData if everything completes with success.
 
 **NOTE : **
 If role of user is Parent, it also saves children list into NISData. If user has more than 1 child 
