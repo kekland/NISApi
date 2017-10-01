@@ -9,7 +9,41 @@ API for NIS - to make easy android applications that helps NIS students
 
 3. Add INTERNET permission into your firebase.
 
-You are all set now!
+*(Optional) You can remove folder Utilities, but then you should refactor the code so you can remove all DebugLog class calls*
+
+# Classes
+
+## NISApi
+Main class that contains all the required functions.
+
+## NISData
+Class to handle all the data.
+
+## NISApiUtils
+Class that has utility functions.
+
+## NISChild
+Class that contains information about child.
+
+## NISDiary
+Enum that contains type of selected diary, currently has only two diaries - IMKO and JKO.
+
+## NISRole
+Enum that contains role of user, currently has three used states (None, Student, Parent) and one state that is currently unused (Teacher).
+
+# Some terminology
+
+## Role
+Role is a role of user in system. There are lots of roles, but NISApi supports only two : Student and Parent.
+
+Roles are given when user starts logging in.
+
+There is enum for roles, called NISRole.
+
+## Children
+Account with role Parent has children. Children also can be acquired when user starts to log in.
+
+Lots of Parent users have only one child, in that case NISData automatically sets selected child to that child. Otherwise, it will be null until you set it by yourself.
 
 # Usage
 All functions are in NISApi class.
@@ -17,9 +51,12 @@ All functions are in NISApi class.
 ## NISApi.Login
 ### Usage :
 
-Used to log in into system. If everything was successful it saves user data into static NISData class and updates cookies.
+Used to log in into system. 
 
-**NOTE : **
+If everything was successful it saves user data into static NISData class and updates cookies.
+
+
+**NOTE :**
 If role of user is Parent, it also saves children list into NISData. If user has more than 1 child 
 you should handle this and show dialog / spinner
 with list of children to select, then use function NISData.setSelectedChild(NISChild child) to save it.
