@@ -2,9 +2,14 @@
 API for NIS - to make easy android applications that helps NIS students
 
 # Install
+
 1. Add the following line to your app-level build.gradle<code>    compile 'com.loopj.android:android-async-http:1.4.9'</code>
 
 2. Download this repository and put both folders into your *java* folder
+
+3. Add INTERNET permission into your firebase.
+
+You are all set now!
 
 # Usage
 All functions are in NISApi class.
@@ -427,3 +432,73 @@ If strength is below 3 - it is counted as weak password, so you cannot use it to
     }
     
 </code>
+
+## Other stuff to check :
+
+## NISApiUtils contains useful elements :
+
+### NISApiUtils.URLs 
+    
+Contains URLs of all schools.
+    
+<code>
+        
+    public static ArrayList<String> URLs = new ArrayList<String>()
+    {{
+        add("http://akt.nis.edu.kz/Aktau");
+        add("http://akb.nis.edu.kz/Aktobe");
+        add("http://fmalm.nis.edu.kz/Almaty_Fmsh");
+        add("http://hbalm.nis.edu.kz/Almaty_HBSH");
+        add("http://ast.nis.edu.kz/Astana_FMSH");
+        add("http://atr.nis.edu.kz/Atyrau");
+        add("http://krg.nis.edu.kz/Karaganda");
+        add("http://kt.nis.edu.kz/Kokshetau");
+        add("http://kst.nis.edu.kz/Kostanay");
+        add("http://kzl.nis.edu.kz/Kyzylorda");
+        add("http://pvl.nis.edu.kz/Pavlodar");
+        add("http://ptr.nis.edu.kz/Petropavlovsk");
+        add("http://sm.nis.edu.kz/Semey_FMSH");
+        add("http://tk.nis.edu.kz/Taldykorgan");
+        add("http://trz.nis.edu.kz/Taraz");
+        add("http://ura.nis.edu.kz/Uralsk");
+        add("http://ukk.nis.edu.kz/Oskemen");
+        add("http://fmsh.nis.edu.kz/Shymkent_FMSH");
+        add("http://hbsh.nis.edu.kz/Shymkent_HBSH");
+    }};
+    
+</code>
+
+### NISApiUtils.SchoolNames 
+    
+Contains names of all schools - in the same order as URLs.
+    
+<code>
+    
+    public static ArrayList<String> SchoolNames = new ArrayList<String>()
+    {{
+        add("Aktau CBD");
+        add("Aktobe PhMD");
+        add("Almaty PhMD");
+        add("Almaty CBD");
+        add("Astana PhMD");
+        add("Atyrau CBD");
+        add("Karaganda CBD");
+        add("Kokshetau PhMD");
+        add("Kostanay PhMD");
+        add("Kyzylorda CBD");
+        add("Pavlodar CBD");
+        add("Petropavlovsk CBD");
+        add("Semey PhMD");
+        add("Taldykorgan PhMD");
+        add("Taraz PhMD");
+        add("Uralsk PhMD");
+        add("Ust-Kamenogorsk CBD");
+        add("Shymkent PhMD");
+        add("Shymkent CBD");
+    }};
+
+</code>
+
+### GetSchoolNameByLink(String link)
+
+Used to get school name by link.
