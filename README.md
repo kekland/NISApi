@@ -11,6 +11,8 @@ API for NIS - to make easy android applications that helps NIS students
 
 *(Optional) You can remove folder Utilities, but then you should refactor the code so you can remove all DebugLog class calls*
 
+4. You SHOULD call NISApi.Init(getBaseContext()) before any NISApi calls. Good way to do it will be in Application's setBaseContext() method.
+
 # Classes
 
 ## NISApi
@@ -557,6 +559,15 @@ Contains names of all schools - in the same order as URLs.
 
 Used to get school name by link.
 
+### NISData.Load(Context c)
+
+Loads all data from SharedPreferences. Requires any type of context.
+
+Throws NullPointerException if something was not found.
+
+### NISData.Save(Context c)
+
+Saves all data to SharedPreferences. Requires any type of context.
 
 # Credits
 Android Async HTTP Client by loopj
