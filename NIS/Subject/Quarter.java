@@ -18,10 +18,18 @@ import java.util.List;
 public class Quarter {
     public Integer PeriodID;
 
-    public List<IMKOLesson> IMKOSubjects;
-    public List<JKOLesson> JKOSubjects;
+    private List<IMKOLesson> IMKOSubjects;
+    private List<JKOLesson> JKOSubjects;
 
     public NISDiary Type;
+
+    public List<IMKOLesson> GetSubjectsIMKO() {
+        return IMKOSubjects;
+    }
+
+    public List<JKOLesson> GetSubjectsJKO() {
+        return JKOSubjects;
+    }
 
     public Quarter(NISDiary type, Integer periodID, JSONArray Subjects) {
         Type = type;

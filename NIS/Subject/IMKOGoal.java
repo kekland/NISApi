@@ -13,7 +13,7 @@ public class IMKOGoal {
     public String Description;
     public String Date;
     public String Achieved;
-    public Integer Status;
+    public GoalStatus Status;
     public String Comment;
 
     public String GroupIndex;
@@ -35,13 +35,13 @@ public class IMKOGoal {
             GroupName = goal.getString("GroupName");
 
             if(ach.equals("Достиг") || ach.equals("Жетті") || ach.equals("Achieved")) {
-                Status = 1;
+                Status = GoalStatus.Achieved;
             }
             else if(ach.equals("Стремится") || ach.equals("Тырысады") || ach.equals("Working towards")) {
-                Status = -1;
+                Status = GoalStatus.WorkingTowards;
             }
             else {
-                Status = 0;
+                Status = GoalStatus.NotAssessed;
             }
 
             if(Date.length() != 0) {

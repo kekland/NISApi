@@ -156,7 +156,7 @@ public class NISApi {
 
                                 @Override
                                 public void onSuccess() {
-                                    ChangePassword(DefaultPassword, Pass, School, new NISApiAccount.ChangePasswordListener() {
+                                    ChangePassword(DefaultPassword, Pass, new NISApiAccount.ChangePasswordListener() {
                                         @Override
                                         public void onStart() {
 
@@ -199,9 +199,9 @@ public class NISApi {
         NISApiSubjects.GetJKOSubjects(client, NISData.getSelectedChild(), listener);
     }
 
-    public static void GetIMKOGoals(IMKOLesson lesson, int period,
-                                    NISChild child, NISApiSubjects.IMKOMarksListener listener) {
-        NISApiSubjects.GetIMKOMarks(client, lesson, period, child, listener);
+    public static void GetIMKOGoals(IMKOLesson lesson,
+                                    NISApiSubjects.IMKOMarksListener listener) {
+        NISApiSubjects.GetIMKOMarks(client, lesson, NISData.getSelectedChild(), listener);
     }
 
     public static void GetJKOGoals(JKOLesson lesson, NISApiSubjects.JKOMarksListener listener) {
@@ -212,9 +212,9 @@ public class NISApi {
 
     }
 
-    public static void ChangePassword(String OldPassword, String NewPassword, String School,
+    public static void ChangePassword(String OldPassword, String NewPassword,
                                       final NISApiAccount.ChangePasswordListener listener) {
-        NISApiAccount.ChangePassword(client, School, OldPassword, NewPassword, listener);
+        NISApiAccount.ChangePassword(client, NISData.getSchool(), OldPassword, NewPassword, listener);
     }
 
     public static void GetPasswordStrength(String password, NISApiMisc.PassStrengthListener listener) {

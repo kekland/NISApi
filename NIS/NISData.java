@@ -4,12 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -102,53 +96,6 @@ public class NISData {
         prefs.apply();
     }
 
-    public static void SaveInDatabase(FirebaseDatabase database, OnCompleteListener<Void> listener) {
-        Map<String, String> DatabaseValues = new HashMap<>();
-
-        DatabaseValues.put("PIN", getPIN());
-        DatabaseValues.put("Password", getPassword());
-        DatabaseValues.put("School", getSchool());
-        DatabaseValues.put("Nickname", getNickname());
-        DatabaseValues.put("Role", getRole().toString());
-
-        database.getReference().child("users-v2")
-                .child(NISApiUtils.ConvertURLToDatabaseURI(getSchool()))
-                .child(PIN).setValue(DatabaseValues)
-                .addOnCompleteListener(listener);
-    }
-
-    public static void GetFromDatabase(FirebaseDatabase database, String PIN, String School,
-                                       final DatabaseListener listener) {
-        listener.onStart();
-        database.getReference()
-                .child(NISApiUtils.ConvertURLToDatabaseURI(getSchool()))
-                .child(PIN)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        setPIN(dataSnapshot.child("PIN").getValue().toString());
-                        setPassword(dataSnapshot.child("Password").getValue().toString());
-                        setSchool(dataSnapshot.child("School").getValue().toString());
-                        setNickname(dataSnapshot.child("Nickname").getValue().toString());
-                        setRole(NISRole.valueOf(dataSnapshot.child("Role").getValue().toString()));
-
-                        listener.onSuccess();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        listener.onFailure(databaseError);
-                    }
-                });
-    }
-
-    public interface DatabaseListener {
-        void onStart();
-        void onSuccess();
-        void onFailure(DatabaseError error);
-    }
-
-
 
     //Getters and setters
 
@@ -200,6 +147,9 @@ public class NISData {
 
     public static void setChildren(NISChild[] children) {
         Children = children;
+        if(Children.length == 1) {
+            setSelectedChild(Children[0]);
+        }
     }
 
     public static NISChild getSelectedChild() {

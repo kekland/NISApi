@@ -255,11 +255,11 @@ public class NISApiSubjects {
     }
 
     public static void GetIMKOMarks(final AsyncHttpClient client,
-                                     final IMKOLesson lesson, final int period, final NISChild child,
+                                     final IMKOLesson lesson, final NISChild child,
                                      final IMKOMarksListener listener) {
         listener.onStart();
         RequestParams params = new RequestParams();
-        params.put("periodId", period + 1);
+        params.put("periodId", lesson.Period + 1);
         params.put("subjectId", lesson.id);
         if (child != null) {
             params.put("studentId", child.studentID);

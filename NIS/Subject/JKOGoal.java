@@ -11,26 +11,26 @@ import org.json.JSONObject;
 public class JKOGoal {
     public String Name;
 
-    public String f1;
-    public String f2;
-    public String s1;
-    public String s2;
+    public String sectionScore;
+    public String sectionMaxScore;
+    public String summativeScore;
+    public String summativeMaxScore;
 
     public JKOGoal(JSONObject f, JSONObject s) {
         try {
             Name = f.getString("Name");
 
-            f1 = f.getString("Score");
-            if(f1.equals("-1")) {
-                f1 = "0";
+            sectionScore = f.getString("Score");
+            if(sectionScore.equals("-1")) {
+                sectionScore = "0";
             }
-            f2 = f.getString("MaxScore");
+            sectionMaxScore = f.getString("MaxScore");
 
-            s1 = s.getString("Score");
-            if(s1.equals("-1")) {
-                s1 = "0";
+            summativeScore = s.getString("Score");
+            if(summativeScore.equals("-1")) {
+                summativeScore = "0";
             }
-            s2 = s.getString("MaxScore");
+            summativeMaxScore = s.getString("MaxScore");
         }
         catch(Exception e) {
             Log.e("MarkParse", e.toString());
@@ -40,10 +40,10 @@ public class JKOGoal {
 
     public Integer GetPercentage() {
         try {
-            Integer ff = Integer.parseInt(f1);
-            Integer fs = Integer.parseInt(f2);
-            Integer sf = Integer.parseInt(s1);
-            Integer ss = Integer.parseInt(s2);
+            Integer ff = Integer.parseInt(sectionScore);
+            Integer fs = Integer.parseInt(sectionMaxScore);
+            Integer sf = Integer.parseInt(summativeScore);
+            Integer ss = Integer.parseInt(summativeMaxScore);
 
             Double fTotal = ((double)ff / (double)fs) * 100.0;
             Double sTotal = ((double)sf / (double)ss) * 100.0;
