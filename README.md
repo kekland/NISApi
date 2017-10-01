@@ -145,7 +145,7 @@ If logging in with default password succeeds, it changes password to password th
 
 It will also save data to NISData if everything completes with success.
 
-**NOTE : **
+**NOTE :**
 If role of user is Parent, it also saves children list into NISData. If user has more than 1 child 
 you should handle this and show dialog / spinner
 with list of children to select, then use function NISData.setSelectedChild(NISChild child) to save it.
