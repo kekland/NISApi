@@ -556,3 +556,9 @@ Contains names of all schools - in the same order as URLs.
 ### GetSchoolNameByLink(String link)
 
 Used to get school name by link.
+
+
+# Credits
+Android Async HTTP Client by loopj
+
+http://loopj.com/android-async-http/
