@@ -7,7 +7,7 @@ API for NIS - to make easy android applications that helps NIS students
 
 2. Download this repository and put both folders into your *java* folder
 
-3. Add INTERNET permission into your firebase.
+3. Add INTERNET permission into your manifest.
 
 *(Optional) You can remove folder Utilities, but then you should refactor the code so you can remove all DebugLog class calls*
 
@@ -34,7 +34,7 @@ Enum that contains role of user, currently has three used states (None, Student,
 # Some terminology
 
 ## Role
-Role is a role of user in system. There are lots of roles, but NISApi supports only two : Student and Parent.
+Role is a position of user in system. There are lots of roles, but NISApi supports only two : Student and Parent.
 
 Roles are given when user starts logging in.
 
@@ -69,7 +69,7 @@ with list of children to select, then use function NISData.setSelectedChild(NISC
 
 **School** - *String* - School, for example : <code> http://fmalm.nis.edu.kz/Almaty_Fmsh </code> 
 
-**All school URLs must be in the same format!**
+**All school URLs must be in the same format, like <code> http://SOMEURL.nis.edu.kz/SCHOOLNAME </code>**
 
 **listener** - *NISApiAccount.LoginListener* - Listener, has 3 functions : onStart(), onSuccess(), onFailure(String error)
 
@@ -139,9 +139,9 @@ Used to check credentials of user - it is faster than logging in, but it does no
 
 Used primarily to register - first, it tries to log in with given password, 
 if it fails, it tries to log in with default password ("Qqwerty1!"), and if it also fails,
-fires onFailure();
+fires onFailure().
 
-If logging in with default password succeeds, it changes password to password that was given.
+If logging in with default password succeeds, it changes password to password that was given and fires onSuccess().
 
 It will also save data to NISData if everything completes with success.
 
@@ -187,7 +187,10 @@ with list of children to select, then use function NISData.setSelectedChild(NISC
 ## NISApi.GetIMKOSubjects
 ### Usage :
 
-Used to get IMKO subjects - call this function only when you have successfully logged in.
+Used to get IMKO subjects.
+
+Use this function only when user is logged in and data is in NISData, otherwise it can throw NullPointerException.
+
 Uses data from NISData class.
 
 ### Arguments : 
@@ -232,7 +235,10 @@ Uses data from NISData class.
 ## NISApi.GetJKOSubjects
 ### Usage :
 
-Used to get JKO subjects - call this function only when you have successfully logged in.
+Used to get JKO subjects.
+
+Use this function only when user is logged in and data is in NISData, otherwise it can throw NullPointerException.
+
 Uses data from NISData class.
 
 ### Arguments : 
@@ -277,6 +283,8 @@ Uses data from NISData class.
 ### Usage :
 
 Used to get IMKO goals, including list of homework.
+
+Use this function only when user is logged in and data is in NISData, otherwise it can throw NullPointerException.
 
 ### Arguments : 
 
@@ -342,6 +350,8 @@ Used to get IMKO goals, including list of homework.
 
 Used to get JKO goals.
 
+Use this function only when user is logged in and data is in NISData, otherwise it can throw NullPointerException.
+
 ### Arguments : 
 
 **lesson** - *JKOLesson* - Lesson to get goals from  
@@ -393,8 +403,11 @@ Used to get JKO goals.
 ### Usage :
 
 Used to change user password.
+
 User should be authenticated before changing password.
-Also, it uses data from NISData, therefore it can cause NullPointerException if user was not authenticated beforehand.
+
+Also, it uses data from NISData, therefore it can cause NullPointerException if user was not authenticated before.
+
 Your password also should be strong enough (you can check it with NISApi.GetPasswordStrength) to succeed.
 
 ### Arguments : 
@@ -434,6 +447,7 @@ Your password also should be strong enough (you can check it with NISApi.GetPass
 
 Used to get password strength.
 Does not require credentials.
+
 If strength is below 3 - it is counted as weak password, so you cannot use it to change password or log in.
 
 ### Arguments : 
